@@ -17,13 +17,18 @@ Tested on:
 
 
 ## Usage
+## Face detect
+'''
+here use opencv-face-detection. or you can use the mtcnn-caffemodel, 
+
+I have packaged the mtcnn face model into a class, the link is [here](https://github.com/jimeffry/face-detect-recognize/tree/master/demo).
+'''
 
 ### Use pretrained model
 Download pretrained model weights for TensorFlow backend:
 
-```sh
-mkdir -p pretrained_models
-wget -P pretrained_models https://www.dropbox.com/s/rf8hgoev8uqjv3z/weights.18-4.06.hdf5
+```
+The age, gender and emotion pretrained models locate in the directory PRJ_ROOT/trained_models/
 ```
 
 Run demo script (requires web cam)

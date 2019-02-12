@@ -4,17 +4,14 @@ In training, [the IMDB-WIKI dataset](https://data.vision.ee.ethz.ch/cvl/rrothe/i
 
 
 ## Dependencies
-- Python3.5+
+- Python2.7+
 - Keras2.0+
 - scipy, numpy, Pandas, tqdm, tables, h5py
-- dlib (for demo)
 - OpenCV3
 
 Tested on:
-- Ubuntu 16.04, Python 3.5.2, Keras 2.0.3, Tensorflow(-gpu) 1.0.1, Theano 0.9.0, CUDA 8.0, cuDNN 5.0
+- Ubuntu 16.04, Python 3.5.2, Keras 2.0.3, Tensorflow(-gpu) 1.0.1,  CUDA 8.0, cuDNN 5.0
   - CPU: i7-7700 3.60GHz, GPU: GeForce GTX1080
-- macOS Sierra, Python 3.6.0, Keras 2.0.2, Tensorflow 1.0.0, Theano 0.9.0
-
 
 ## Usage
 ## Face detect
@@ -34,10 +31,8 @@ The age, gender and emotion pretrained models locate in the directory PRJ_ROOT/t
 Run demo script (requires web cam)
 
 ```sh
-python3 demo.py
+python demo.py
 ```
-
-Model weights for Theano backend is also available from [here](https://drive.google.com/file/d/0B_cG1nzvVZlQWGJMc2JjdzkwcVk/view?usp=sharing).
 
 ### Train a model using the IMDB-WIKI dataset
 
@@ -52,7 +47,7 @@ The dataset is downloaded and extracted to the `data` directory.
 Filter out noise data and serialize images and labels for training into `.mat` file.
 Please check [check_dataset.ipynb](check_dataset.ipynb) for the details of the dataset.
 ```sh
-python3 create_db.py --output data/imdb_db.mat --db imdb --img_size 64
+python create_db.py --output data/imdb_db.mat --db imdb --img_size 64
 ```
 
 ```sh
@@ -72,7 +67,7 @@ optional arguments:
 Train the network using the training data created above.
 
 ```sh
-python3 train.py --input data/imdb_db.mat
+python train.py --input data/imdb_db.mat
 ```
 
 Trained weight files are stored as `checkpoints/weights.*.hdf5` for each epoch if the validation loss becomes minimum over previous epochs.
@@ -97,7 +92,7 @@ optional arguments:
 #### Use the trained network
 
 ```sh
-python3 demo.py
+python demo.py
 ```
 
 ```sh
@@ -119,7 +114,7 @@ Please use the best model among `checkpoints/weights.*.hdf5` for `WEIGHT_FILE` i
 #### Plot training curves from history file
 
 ```sh
-python3 plot_history.py --input models/history_16_8.h5 
+python plot_history.py --input models/history_16_8.h5 
 ```
 
 <img src="https://github.com/yu4u/age-gender-estimation/wiki/images/loss.png" width="400px">

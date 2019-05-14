@@ -33,42 +33,19 @@ def draw_label(image, point, label, font=cv2.FONT_HERSHEY_SIMPLEX,
     cv2.rectangle(image, (x, y - size[1]), (x + size[0], y), (255, 0, 0), cv2.FILLED)
     cv2.putText(image, label, point, font, font_scale, (255, 255, 255), thickness)
 
-
-def detect_face(img,img_size):
-    detector = MtcnnDetector(model_folder='./model', ctx=mx.cpu(0), num_worker = 1 , accurate_landmark = False)
-    results = detector.detect_face(img)
-    if results is None:
-        return 0
-    total_boxes = results[0]
-    points = results[1]
-    face_crops = detector.extract_image_chips(img, points, img_size, 0.37)
-    '''
-    draw = img.copy()
-    for b in total_boxes:
-        cv2.rectangle(draw, (int(b[0]), int(b[1])), (int(b[2]), int(b[3])), (255, 255, 255))
-    for p in points:
-        for i in range(5):
-            cv2.circle(draw, (p[i], p[i + 5]), 1, (255, 0, 0), 2)
-    '''
-    return face_crops, total_boxes
-
 def main():
     args = get_args()
     depth = args.depth
     k = args.width
     weight_file = args.weight_file
-
     if not weight_file:
-        weight_file = os.path.join("./pretrained_models", "weights.18-4.06.hdf5")
-
+        weight_file = os.path.join("../pretrained_models", "weights.18-4.06.hdf5")
     # for face detection
-    #detector = dlib.get_frontal_face_detector()
-
+    detector = MtcnnDetector(model_folder='../model', ctx=mx.cpu(0))
     # load model and weights
-    img_size = 64
+    img_size = [64,64]
     model = WideResNet(img_size, depth=depth, k=k)()
     model.load_weights(weight_file)
-
     # capture video
     cap = cv2.VideoCapture(0)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
@@ -82,9 +59,8 @@ def main():
             print("error: failed to capture image")
             return -1
 
-        img = cv2.resize(img, (320,180))
-        faces,bboxes = detect_face(img,img_size)
-
+        #img = cv2.resize(img, (320,180))
+        faces,bboxes = detector.detect_faces(img,img_size)
         #input_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         #img_h, img_w, _ = np.shape(input_img)
 

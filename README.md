@@ -31,7 +31,7 @@ The age, gender and emotion pretrained models locate in the directory PRJ_ROOT/t
 Run demo script (requires web cam)
 
 ```sh
-python demo.py
+python test.py
 ```
 
 ### Train a model using the IMDB-WIKI dataset

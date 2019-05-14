@@ -13,7 +13,7 @@ os.environ['KERAS_BACKEND']='tensorflow'
 import argparse
 import cv2
 import sys
-sys.path.append('../')
+sys.path.append('../../')
 #####################
 from keras import backend as K
 from keras.models import model_from_json
@@ -33,7 +33,7 @@ def get_args():
     parser = argparse.ArgumentParser(description="This script detects faces from web cam input, "
                                                  "and estimates age and gender for the detected faces.",
                                      formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument("--weight_file", type=str, default='../trained_models/ag_models/weights.25000-0.03.hdf5',
+    parser.add_argument("--weight_file", type=str, default='../../trained_models/ag_models/weights.25000-0.03.hdf5',
                         help="path to weight file (e.g. weights.18-4.06.hdf5)")
     parser.add_argument("--depth", type=int, default=16,
                         help="depth of network")
@@ -41,7 +41,7 @@ def get_args():
                         help="width of network")
     parser.add_argument("--img_size",type=int,default=64,
                         help='the net input size')
-    parser.add_argument('--json_fil',type=str,default='../trained_models/ag_models/WRN_16_2.json',
+    parser.add_argument('--json_fil',type=str,default='../../trained_models/ag_models/WRN_16_2.json',
                         help='saved json file')
     parser.add_argument('--file_in',type=str,default='None',
                         help='input file')
@@ -238,11 +238,11 @@ def main():
     age_size = args.img_size
     json_file = args.json_fil
     file_in = args.file_in
-    detect_model_path = "../trained_models/detection_models/haarcascade_frontalface_default.xml"
-    emotion_model_path = '../trained_models/emotion_models/fer2013_mini_XCEPTION.110-0.65.hdf5'
+    detect_model_path = "../../trained_models/detection_models/haarcascade_frontalface_default.xml"
+    emotion_model_path = '../../trained_models/emotion_models/fer2013_mini_XCEPTION.110-0.65.hdf5'
     #gender_model_path = '../trained_models/gender_models/simple_CNN.81-0.96.hdf5'
     #gender_model_path = '../trained_models/gender_models/gender_mini_XCEPTION.176-0.91.hdf5'
-    gender_model_path = '../trained_models/gender_models/gender_mini_XCEPTION.2878-0.93.hdf5'
+    gender_model_path = '../../trained_models/gender_models/gender_mini_XCEPTION.2878-0.93.hdf5'
     gender_offsets = (30, 60)
     emotion_offsets = (20, 40)
     age_offsets =(0,0)
